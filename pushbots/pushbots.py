@@ -63,24 +63,13 @@ class Pushbots:
         @tag        Optional (List of strings). List of tags associated with
                     the deviceToken,if empty array that'll remove any
                     associated tags e.g. ["Culture" , "EGYPT"].
-        @data       Required (String). Data to be sent.
+        @data       Required (Dict). Data to be sent.
         """
 
         if not data:
             data = self._get_data(token=token, platform=platform, lat=lat,
                                   lng=lng, active=active, tag=tag, alias=alias)
-        # data = {self.KEY_TOKEN: token, self.KEY_PLATFORM: platform}
-        # if lat:
-        #     data[self.KEY_LAT] = lat
-        # if lng:
-        #     data[self.KEY_LNG] = lng
-        # if active:
-        #     data[self.KEY_ACTIVE] = active
-        # if tag:
-        #     data[self.KEY_TAG] = tag
-        # if alias:
-        #     data[self.KEY_ALIAS] = alias
-        # data = json.dumps(data)
+        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/deviceToken'
         headers = self.headers
         r = requests.put(api_url, headers=headers, data=data)
@@ -95,15 +84,12 @@ class Pushbots:
         @platform   Required (Integer). 0 for iOS, 1 for Android.
         @tags        Optional (List of strings). List of tags associated
                     with all imported devices e.g. ["Culture" , "USA"].
-        @data       Required (String). Data to be sent.
+        @data       Required (Dict). Data to be sent.
         """
 
         if not data:
             data = self._get_data(tokens=tokens, platform=platform, tags=tags)
-        # data = {self.KEY_TOKENS: tokens, self.KEY_PLATFORM: platform}
-        # if tags:
-        #     data[self.KEY_TAGS] = tags
-        # data = json.dumps(data)
+        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/deviceToken/batch'
         headers = self.headers
         r = requests.put(api_url, headers=headers, data=data)
@@ -117,13 +103,12 @@ class Pushbots:
                     device token of the iOS app or RegID of the android App
                     and usually it's managed using SDK.
         @platform   Required (Integer). 0 for iOS, 1 for Android.
-        @data       Required (String). Data to be sent.
+        @data       Required (Dict). Data to be sent.
         """
 
         if not data:
             data = self._get_data(token=token, platform=platform)
-        # data = {self.KEY_TOKEN: token, self.KEY_PLATFORM: platform}
-        # data = json.dumps(data)
+        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/deviceToken/del'
         headers = self.headers
         r = requests.put(api_url, headers=headers, data=data)
@@ -145,20 +130,13 @@ class Pushbots:
                     "username", "email" ..etc
         @current_alias  Optional (String). Set this parameter in case you want
                         to update existing alias.
-        @data       Required (String). Data to be sent.
+        @data       Required (Dict). Data to be sent.
         """
 
         if not data:
             data = self._get_data(platform=platform, token=token, alias=alias,
                                   current_alias=current_alias)
-        # data = {self.KEY_PLATFORM: platform}
-        # if token:
-        #     data[self.KEY_TOKEN] = token
-        # if alias:
-        #     data[self.KEY_ALIAS] = alias
-        # if current_alias:
-        #     data[self.KEY_CURRENT_ALIAS] = current_alias
-        # data = json.dumps(data)
+        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/alias'
         headers = self.headers
         r = requests.put(api_url, headers=headers, data=data)
@@ -178,18 +156,13 @@ class Pushbots:
         @alias      Optional (String). Alias to access device data without
                     tokens and it must be unique for every app e.g.
                     "username", "email" ..etc.
-        @data       Required (String). Data to be sent.
+        @data       Required (Dict). Data to be sent.
         """
 
         if not data:
             data = self._get_data(platform=platform, tag=tag,
                                   token=token, alias=alias)
-        # data = {self.KEY_PLATFORM: platform, self.KEY_TAG: tag}
-        # if token:
-        #     data[self.KEY_TOKEN] = token
-        # if alias:
-        #     data[self.KEY_ALIAS] = alias
-        # data = json.dumps(data)
+        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/tag'
         headers = self.headers
         r = requests.put(api_url, headers=headers, data=data)
@@ -209,17 +182,12 @@ class Pushbots:
         @alias      Optional (String). Alias to access device data without
                     tokens and it must be unique for every app e.g.
                     "username", "email" ..etc.
-        @data       Required (String). Data to be sent.
+        @data       Required (Dict). Data to be sent.
         """
 
         data = self._get_data(platform=platform, tag=tag, token=token,
                               alias=alias)
-        # data = {self.KEY_PLATFORM: platform, self.KEY_TAG: tag}
-        # if token:
-        #     data[self.KEY_TOKEN] = token
-        # if alias:
-        #     data[self.KEY_ALIAS] = alias
-        # data = json.dumps(data)
+        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/tag/del'
         headers = self.headers
         r = requests.put(api_url, headers=headers, data=data)
@@ -236,15 +204,13 @@ class Pushbots:
                     and usually it's managed using SDK.
         @lat        Required (Integer). Location latitude e.g. 33.7489.
         @lng        Required (Integer). Location longitude e.g. -84.3789.
-        @data       Required (String). Data to be sent.
+        @data       Required (Dict). Data to be sent.
         """
 
         if not data:
             data = self._get_data(platform=platform, token=token,
                                   lat=lat, lng=lng)
-        # data = {self.KEY_PLATFORM: platform, self.KEY_TOKEN: token,
-        #         self.KEY_LAT: lat, self.KEY_LNG: lng}
-        # data = json.dumps(data)
+        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/geo'
         headers = self.headers
         r = requests.put(api_url, headers=headers, data=data)
@@ -264,21 +230,13 @@ class Pushbots:
                     e.g. +1 to increment all devices by 1 and 0 to reset the
                     badge of all devices.
         @payload    Optional (Dict). Custom fields.
-        @data       Required (String). Data to be sent.
+        @data       Required (Dict). Data to be sent.
         """
 
         if not data:
             data = self._get_data(platform=platform, token=token, msg=msg,
                                   sound=sound, badge=badge, payload=payload)
-        # data = {self.KEY_PLATFORM: platform, self.KEY_TOKEN: token,
-        #         self.KEY_MSG: msg}
-        # if sound:
-        #     data[self.KEY_SOUND] = sound
-        # if badge:
-        #     data[self.KEY_BADGE] = badge
-        # if payload:
-        #     data[self.KEY_PAYLOAD] = payload
-        # data = json.dumps(data)
+        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/push/one'
         headers = self.headers
         r = requests.post(api_url, headers=headers, data=data)
@@ -308,7 +266,7 @@ class Pushbots:
         @except_alias Optional (List of strings). List of aliases for the
                       notification not to be pushed
         @payload    Optional (Dict). Custom fields.
-        @data       Required (String). Data to be sent.
+        @data       Required (Dict). Data to be sent.
         """
 
         if not data:
@@ -316,24 +274,7 @@ class Pushbots:
                                   badge=badge, schedule=schedule, tags=tags,
                                   except_tags=except_tags, alias=alias,
                                   except_alias=except_alias, payload=payload)
-        # data = {self.KEY_PLATFORM: platform, self.KEY_MSG: msg}
-        # if sound:
-        #     data[self.KEY_SOUND] = sound
-        # if badge:
-        #     data[self.KEY_BADGE] = badge
-        # if schedule:
-        #     data[self.KEY_SCHEDULE] = schedule
-        # if tags:
-        #     data[self.KEY_TAGS] = tags
-        # if except_tags:
-        #     data[self.KEY_EXCEPT_TAGS] = except_tags
-        # if alias:
-        #     data[self.KEY_ALIAS] = alias
-        # if except_alias:
-        #     data[self.KEY_EXCEPT_ALIAS] = except_alias
-        # if payload:
-        #     data[self.KEY_PAYLOAD] = payload
-        # data = json.dumps(data)
+        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/push/all'
         headers = self.headers
         r = requests.post(api_url, headers=headers, data=data)
@@ -347,12 +288,13 @@ class Pushbots:
         @token      Required (String). The unique token retrieved by your app;
                     device token of the iOS app or RegID of the android App.
         @badge_count Required (Integer). New Badge count.
-        @data       Required (String). Data to be sent.
+        @data       Required (Dict). Data to be sent.
         """
 
         if not data:
             data = self._get_data(platform=platform, token=token,
                                   badge_count=badge_count)
+        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/badge'
         headers = self.headers
         r = requests.put(api_url, headers=headers, data=data)
@@ -371,11 +313,12 @@ class Pushbots:
         You must, at least, specify either data or the other params.
 
         @platform   Required (Integer). 0 for iOS, 1 for Android.
-        @data       Required (String). Data to be sent.
+        @data       Required (Dict). Data to be sent.
         """
 
         if not data:
             data = self._get_data(platform=platform)
+        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/stats'
         headers = self.headers
         r = requests.put(api_url, headers=headers, data=data)
@@ -425,4 +368,4 @@ class Pushbots:
             data[self.KEY_PAYLOAD] = payload
         if badge_count:
             data[self.KEY_BADGE_COUNT] = badge_count
-        return json.dumps(data)
+        return data
