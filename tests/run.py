@@ -225,15 +225,28 @@ def test_push(pushbots):
 
 
 def test_push_batch(pushbots):
-    debug('\nTesting push_batch() with tags:{0}, alias:{1},'
-          ' except_tags:{2}, except_alias:{3}'
-          .format([tag1], [alias2], [alias1, alias3], [tag2], [alias3]))
-    c, d = push_batch(pushbots=pushbots, platform=platform,
-                      msg='Test message 2', sound='mysound',
-                      badge='16', schedule='2015-04-02T11:33:00',
-                      tags=[tag1], except_tags=[tag2], alias=[alias2],
-                      except_alias=[alias1, alias3],
-                      payload={'mycustomfield3': 'My custom field 3'})
+    debug('\nTesting push_batch() with tags:{0},except_tags:{1}'
+          .format([tag1], [tag2]))
+    c, d = push_batch_tags(pushbots=pushbots, platform=platform,
+                           msg='Test message 2', sound='mysound',
+                           badge='16', schedule='2015-04-02T11:33:00',
+                           tags=[tag1], except_tags=[tag2],
+                           payload={'mycustomfield3': 'My custom field 3'})
+    process_request(c, d)
+
+    debug('\nTesting push_batch() with alias:{0}'.format(alias2))
+    c, d = push_batch_alias1(pushbots=pushbots, platform=platform,
+                             msg='Test message 2', sound='mysound', badge='16',
+                             schedule='2015-04-02T11:33:00', alias=alias2,
+                             payload={'mycustomfield3': 'My custom field 3'})
+    process_request(c, d)
+
+    debug('\nTesting push_batch() with except_alias:{0}'.format(alias3))
+    c, d = push_batch_alias2(pushbots=pushbots, platform=platform,
+                             msg='Test message 2', sound='mysound', badge='16',
+                             schedule='2015-04-02T11:33:00',
+                             except_alias=alias3,
+                             payload={'mycustomfield3': 'My custom field 3'})
     process_request(c, d)
 
     data = {'platform': platform, 'msg': 'Test message 3', 'sound': 'mysound',
@@ -269,7 +282,7 @@ def test_unregister(pushbots):
     process_request(c, d)
 
     # Unregister rest tokens
-    debug('\nUnregistering the rest of the tokens registered by tests.')
+    debug('\nUnregistering the rest of devices registered by tests.')
     unregister_token(pushbots=pushbots, token=token3, platform=platform)
     unregister_token(pushbots=pushbots, token=token4, platform=platform)
     unregister_token(pushbots=pushbots, token=token5, platform=platform)
@@ -287,10 +300,10 @@ def main():
           .format(token1, token2, token3, token4, token5, token6, token7))
     print('Also the following random testing tags will be created:'
           '{0}, {1}'.format(tag1, tag2))
-    print('And the following random testing aliases will be created'
+    print('And the following random testing aliases will be created:'
           '{0}, {1}, {2}'.format(alias1, alias2, alias3))
-    print('If you have conflicing aliases or tags open tests.py and define'
-          'them manually')
+    print('If you have conflicing aliases or tags open tests/run.py and define'
+          ' them manually')
     choice = raw_input('Do you want to continue? (y/n):')
     if choice.lower() != 'y':
         return
