@@ -51,6 +51,38 @@ class Pushbots:
                 'x-pushbots-secret': self._secret,
                 'Content-Type': 'application/json'}
 
+    def put(self, api_url, headers, data=None):
+        """Generic method for put requests.
+        @headers (Dict). Headers to include
+        @data    (Dict). Data to include in json (python dict) format
+        """
+        if data is None:
+            r = requests.put(api_url, headers=headers)
+        else:
+            data = json.dumps(data)
+            r = requests.put(api_url, headers=headers, data=data)
+        return r.status_code, r.text
+
+    def post(self, api_url, headers, data=None):
+        """Generic method for post requests.
+        @headers (Dict). Headers to include
+        @data    (Dict). Data to include in json (python dict) format
+        """
+        if data is None:
+            r = requests.post(api_url, headers=headers)
+        else:
+            data = json.dumps(data)
+            r = requests.post(api_url, headers=headers, data=data)
+        return r.status_code, r.text
+
+    def get(self, api_url, headers):
+        """Generic method for get requests.
+        @headers (Dict). Headers to include
+        @data    (Dict). Data to include in json (python dict) format
+        """
+        r = requests.get(api_url, headers=headers)
+        return r.status_code, r.text
+
     def register(self, token=None, platform=None, lat=None, lng=None,
                  active=None, tag=None, alias=None, data=None):
         """Register device token of the app in the database first time,
@@ -75,11 +107,9 @@ class Pushbots:
         if data is None:
             data = self._get_data(token=token, platform=platform, lat=lat,
                                   lng=lng, active=active, tag=tag, alias=alias)
-        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/deviceToken'
         headers = self.headers
-        r = requests.put(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        return self.put(api_url=api_url, headers=headers, data=data)
 
     def register_batch(self, tokens=None, platform=None, tags=None, data=None):
         """Register multiple devices up to 500 Device per request
@@ -95,11 +125,9 @@ class Pushbots:
 
         if data is None:
             data = self._get_data(tokens=tokens, platform=platform, tags=tags)
-        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/deviceToken/batch'
         headers = self.headers
-        r = requests.put(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        return self.put(api_url=api_url, headers=headers, data=data)
 
     def unregister(self, token=None, platform=None, data=None):
         """unRegister device token of the app from the database
@@ -114,11 +142,9 @@ class Pushbots:
 
         if data is None:
             data = self._get_data(token=token, platform=platform)
-        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/deviceToken/del'
         headers = self.headers
-        r = requests.put(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        return self.put(api_url=api_url, headers=headers, data=data)
 
     def alias(self, platform=None, token=None, alias=None, current_alias=None,
               data=None):
@@ -142,11 +168,9 @@ class Pushbots:
         if data is None:
             data = self._get_data(platform=platform, token=token, alias=alias,
                                   current_alias=current_alias)
-        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/alias'
         headers = self.headers
-        r = requests.put(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        return self.put(api_url=api_url, headers=headers, data=data)
 
     def tag(self, platform=None, tag=None, token=None, alias=None, data=None):
         """Tag a device with its token through SDK or Alias through your backend
@@ -168,11 +192,9 @@ class Pushbots:
         if data is None:
             data = self._get_data(platform=platform, tag=tag,
                                   token=token, alias=alias)
-        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/tag'
         headers = self.headers
-        r = requests.put(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        return self.put(api_url=api_url, headers=headers, data=data)
 
     def untag(self, platform=None, tag=None, token=None,
               alias=None, data=None):
@@ -195,11 +217,9 @@ class Pushbots:
         if data is None:
             data = self._get_data(platform=platform, tag=tag,
                                   token=token, alias=alias)
-        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/tag/del'
         headers = self.headers
-        r = requests.put(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        return self.put(api_url=api_url, headers=headers, data=data)
 
     def device_location(self, platform=None, token=None, lat=None,
                         lng=None, data=None):
@@ -218,11 +238,9 @@ class Pushbots:
         if data is None:
             data = self._get_data(platform=platform, token=token,
                                   lat=lat, lng=lng)
-        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/geo'
         headers = self.headers
-        r = requests.put(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        return self.put(api_url=api_url, headers=headers, data=data)
 
     def push(self, platform=None, token=None, msg=None, sound=None,
              badge=None, payload=None, data=None):
@@ -244,11 +262,9 @@ class Pushbots:
         if data is None:
             data = self._get_data(platform=platform, token=token, msg=msg,
                                   sound=sound, badge=badge, payload=payload)
-        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/push/one'
         headers = self.headers
-        r = requests.post(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        return self.post(api_url=api_url, headers=headers, data=data)
 
     def push_batch(self, platform=None, msg=None, sound=None, badge=None,
                    schedule=None, tags=None, except_tags=None, alias=None,
@@ -282,11 +298,9 @@ class Pushbots:
                                   badge=badge, schedule=schedule, tags=tags,
                                   except_tags=except_tags, alias=alias,
                                   except_alias=except_alias, payload=payload)
-        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/push/all'
         headers = self.headers
-        r = requests.post(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        return self.post(api_url=api_url, headers=headers, data=data)
 
     def badge(self, token=None, platform=None, setbadgecount=None, data=None):
         """Update device Badge
@@ -295,26 +309,23 @@ class Pushbots:
         @platform   Required (String). 0 for iOS, 1 for Android.
         @token      Required (String). The unique token retrieved by your app;
                     device token of the iOS app or RegID of the android App.
-        @badge_count Required (String). New Badge count.
+        @badge_count Required (Integer). New Badge count.
         @data       Required (Dict). Data to be sent.
         """
 
         if data is None:
             data = self._get_data(platform=platform, token=token,
                                   setbadgecount=setbadgecount)
-        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/badge'
         headers = self.headers
-        r = requests.put(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        return self.put(api_url=api_url, headers=headers, data=data)
 
     def get_analytics(self):
         """Get Push analytics of a single Application"""
 
         api_url = 'https://api.pushbots.com/analytics'
         headers = self.headers
-        r = requests.get(api_url, headers=headers)
-        return r.status_code, r.text
+        return self.get(api_url=api_url, headers=headers)
 
     def record_analytics(self, platform=None, data=None):
         """Record Opened Push Analytics.
@@ -326,11 +337,9 @@ class Pushbots:
 
         if data is None:
             data = self._get_data(platform=platform)
-        data = json.dumps(data)
         api_url = 'https://api.pushbots.com/stats'
         headers = self.headers
-        r = requests.put(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        return self.put(api_url=api_url, headers=headers, data=data)
 
     # TODO: implement device_info()
 
