@@ -1,1 +1,1 @@
-from pushbots import Pushbots
+from .pushbots import Pushbots
