@@ -1,3 +1,16 @@
+"""
+This is the python script to run all tests.
+Run with puthon -m tests.run from parent directory.
+For the tests to run we create virtual devices and test all the api calls,
+with many combiniations. For each api call a status code and a text response
+is returned. If DEUBG==True then status code and text response (if any)
+are printed, else they are printed only if status_code is not in
+ACCEPTABLE_CODES.
+We consider all tests passed, if, with DEBUG==True all status codes printed are
+in ACCEPTABLE_CODES and with DEBUG==False, no output is printed.
+In the end, the virtual devices are deleted.
+"""
+
 from tests.register import *
 from tests.register_batch import *
 from tests.unregister import *
