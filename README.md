@@ -1,5 +1,5 @@
 # pushbots #
-A pushbots python 2 API wrapper.  
+A pushbots python 2/python 3 API module (wrapper). The module, the tests and the examples work for both python 2 and python 3 versions.  
 Current pushbots module supports the following list of API calls.  
 In the following list, some of the API calls are tagged with "(For testing API call)". This means that a token is needed to perform those API calls and since this module is reserved for backends, you, normally, won't be using those API calls:
 * Register        (For testing API call)
