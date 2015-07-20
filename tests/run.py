@@ -309,7 +309,12 @@ def main():
           '{0}, {1}, {2}'.format(alias1, alias2, alias3))
     print('If you have conflicing aliases or tags open tests/run.py and define'
           ' them manually')
-    choice = raw_input('Do you want to continue? (y/n):')
+    # The following try catch is for python 2 - python 3 compatibility.
+    try:
+        read_str = raw_input
+    except NameError:
+        read_str = input
+    choice = read_str('Do you want to continue? (y/n):')
     if choice.lower() != 'y':
         return
     pushbots = Pushbots(app_id=APP_ID, secret=SECRET)
