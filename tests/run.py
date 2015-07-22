@@ -11,17 +11,20 @@ in ACCEPTABLE_CODES and with DEBUG==False, no output is printed.
 In the end, the virtual devices are deleted.
 """
 
-from tests.register import *
-from tests.register_batch import *
-from tests.unregister import *
-from tests.alias import *
-from tests.tag import *
-from tests.untag import *
-from tests.device_location import *
-from tests.badge import *
-from tests.analytics import *
-from tests.push import *
-from tests.push_batch import *
+from tests.register import register_token_simple, register_token, register_data
+from tests.register_batch import register_batch_tokens, register_batch_data
+from tests.unregister import unregister_token, unregister_data
+from tests.alias import alias_token, alias_alias, alias_data
+from tests.tag import tag_token, tag_alias, tag_data
+from tests.untag import untag_token, untag_alias, untag_data
+from tests.device_location import device_location_token, device_location_data
+from tests.device_info import device_info
+from tests.badge import badge_token, badge_data
+from tests.analytics import (get_analytics, record_analytics_platform,
+                             record_analytics_data)
+from tests.push import push_token, push_data
+from tests.push_batch import (push_batch_tags, push_batch_alias1,
+                              push_batch_alias2, push_batch_data)
 from pushbots import Pushbots
 import random
 import string
@@ -81,10 +84,10 @@ alias2 = random_str()
 alias3 = random_str()
 
 
-def process_request(d_msg, r_code, r_text):
+def process_request(d_msg, r_code, r_content):
     msg_code = 'Request returned code:{0}'.format(r_code)
-    if r_text:
-        msg_content = 'Response:{0}'.format(r_text)
+    if r_content:
+        msg_content = 'Response:{0}'.format(r_content)
     else:
         msg_content = 'Request did not return any content'
 
@@ -199,6 +202,12 @@ def test_device_location(pushbots):
             'lat': 85.243, 'lng': 17.123}
     d_msg = '\nTesting device_location_data() with data:{0}.'.format(data)
     c, d = device_location_data(pushbots=pushbots, data=data)
+    process_request(d_msg, c, d)
+
+
+def test_device_info(pushbots):
+    d_msg = '\nTesting device_info() with token:{0}'.format(token1)
+    c, d = device_info(pushbots=pushbots, token=token1)
     process_request(d_msg, c, d)
 
 
@@ -324,6 +333,7 @@ def main():
     test_tag(pushbots)
     test_untag(pushbots)
     test_device_location(pushbots)
+    test_device_info(pushbots)
     test_badge(pushbots)
     test_analytics(pushbots)
     test_push(pushbots)
