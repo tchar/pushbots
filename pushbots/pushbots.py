@@ -293,6 +293,16 @@ class Pushbots:
         headers = self.headers
         return self.put(api_url=api_url, headers=headers, data=data)
 
+    def devices_info(self):
+        """
+        Gets information about all registered devices
+        @return     (Integer, Dict). The result of self.get()
+        """
+
+        api_url = 'https://api.pushbots.com/devices'
+        headers = self.headers
+        return self.get(api_url=api_url, headers=headers)
+
     def device_info(self, token=None):
         """
         Get device info.

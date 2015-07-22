@@ -18,7 +18,7 @@ from tests.alias import alias_token, alias_alias, alias_data
 from tests.tag import tag_token, tag_alias, tag_data
 from tests.untag import untag_token, untag_alias, untag_data
 from tests.device_location import device_location_token, device_location_data
-from tests.device_info import device_info
+from tests.device import devices, device_info
 from tests.badge import badge_token, badge_data
 from tests.analytics import (get_analytics, record_analytics_platform,
                              record_analytics_data)
@@ -205,8 +205,12 @@ def test_device_location(pushbots):
     process_request(d_msg, c, d)
 
 
-def test_device_info(pushbots):
-    d_msg = '\nTesting device_info() with token:{0}'.format(token1)
+def test_device(pushbots):
+    d_msg = '\nTesting devices().'
+    c, d = devices(pushbots=pushbots)
+    process_request(d_msg, c, d)
+
+    d_msg = '\nTesting device_info() with token:{0}.'.format(token1)
     c, d = device_info(pushbots=pushbots, token=token1)
     process_request(d_msg, c, d)
 
@@ -225,7 +229,7 @@ def test_badge(pushbots):
 
 
 def test_push(pushbots):
-    d_msg = '\nTesting push_token() with token:{0}'.format(token1)
+    d_msg = '\nTesting push_token() with token:{0}.'.format(token1)
     c, d = push_token(pushbots=pushbots, platform=platform, token=token1,
                       msg='Test message', sound='mysound', badge='16',
                       payload={'mycustomfield': 'Custom field'})
@@ -239,7 +243,7 @@ def test_push(pushbots):
 
 
 def test_push_batch(pushbots):
-    d_msg = ('\nTesting push_batch() with tags:{0},except_tags:{1}'
+    d_msg = ('\nTesting push_batch() with tags:{0},except_tags:{1}.'
              .format([tag1], [tag2]))
     c, d = push_batch_tags(pushbots=pushbots, platform=platform,
                            msg='Test message 2', sound='mysound',
@@ -299,7 +303,7 @@ def test_unregister(pushbots):
 def unregister_all(pushbots):
     # Unregister all tokens
 
-    debug('\nUnregistering the rest of devices registered by tests...')
+    debug('\nUnregistering any devices associated with test\'s tokens...')
     unregister_token(pushbots=pushbots, token=token1, platform=platform)
     unregister_token(pushbots=pushbots, token=token2, platform=platform)
     unregister_token(pushbots=pushbots, token=token3, platform=platform)
@@ -342,7 +346,7 @@ def main():
         test_tag(pushbots)
         test_untag(pushbots)
         test_device_location(pushbots)
-        test_device_info(pushbots)
+        test_device(pushbots)
         test_badge(pushbots)
         test_analytics(pushbots)
         test_push(pushbots)
@@ -355,6 +359,7 @@ def main():
         debug('Exception found:{0}:{1}'.format(type(e), e), error=True)
     finally:
         unregister_all(pushbots)  # Unregister all tokens
+        pass
 
 if __name__ == '__main__':
     main()
