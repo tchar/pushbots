@@ -67,10 +67,14 @@ class Pushbots:
         else:
             data = json.dumps(data)
             r = requests.put(api_url, headers=headers, data=data)
+        # r.json() may raise ValueError if empty,
+        # so in case of ValueError return an empty Dict.
+        status_code = r.status_code
         try:
-            return r.status_code, r.json()
+            content_json = r.json()
         except ValueError:
-            return r.status_code, {}
+            content_json = {}
+        return status_code, content_json
 
     def post(self, api_url, headers, data=None):
         """
@@ -87,10 +91,14 @@ class Pushbots:
         else:
             data = json.dumps(data)
             r = requests.post(api_url, headers=headers, data=data)
+        # r.json() may raise ValueError if empty,
+        # so in case of ValueError return an empty Dict.
+        status_code = r.status_code
         try:
-            return r.status_code, r.json()
+            content_json = r.json()
         except ValueError:
-            return r.status_code, {}
+            content_json = {}
+        return status_code, content_json
 
     def get(self, api_url, headers):
         """
@@ -103,10 +111,14 @@ class Pushbots:
                  if there was no repsonse
         """
         r = requests.get(api_url, headers=headers)
+        # r.json() may raise ValueError if empty,
+        # so in case of ValueError return an empty Dict.
+        status_code = r.status_code
         try:
-            return r.status_code, r.json()
+            content_json = r.json()
         except ValueError:
-            return r.status_code, {}
+            content_json = {}
+        return status_code, content_json
 
     def register(self, token=None, platform=None, lat=None, lng=None,
                  active=None, tag=None, alias=None, data=None):

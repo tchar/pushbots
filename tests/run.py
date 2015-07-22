@@ -295,13 +295,19 @@ def test_unregister(pushbots):
     c, d = unregister_data(pushbots=pushbots, data=data)
     process_request(d_msg, c, d)
 
-    # Unregister rest tokens
-    debug('\nUnregistering the rest of devices registered by tests.')
+
+def unregister_all(pushbots):
+    # Unregister all tokens
+
+    debug('\nUnregistering the rest of devices registered by tests...')
+    unregister_token(pushbots=pushbots, token=token1, platform=platform)
+    unregister_token(pushbots=pushbots, token=token2, platform=platform)
     unregister_token(pushbots=pushbots, token=token3, platform=platform)
     unregister_token(pushbots=pushbots, token=token4, platform=platform)
     unregister_token(pushbots=pushbots, token=token5, platform=platform)
     unregister_token(pushbots=pushbots, token=token6, platform=platform)
     unregister_token(pushbots=pushbots, token=token7, platform=platform)
+    debug('\nDone!')
 
 
 def main():
@@ -327,19 +333,28 @@ def main():
     if choice.lower() != 'y':
         return
     pushbots = Pushbots(app_id=APP_ID, secret=SECRET)
-    test_register(pushbots)
-    test_register_batch(pushbots)
-    test_alias(pushbots)
-    test_tag(pushbots)
-    test_untag(pushbots)
-    test_device_location(pushbots)
-    test_device_info(pushbots)
-    test_badge(pushbots)
-    test_analytics(pushbots)
-    test_push(pushbots)
-    test_push_batch(pushbots)
-    test_unregister(pushbots)
-
+    try:
+        unregister_all(pushbots)  # Do this for clean testing.
+        debug('\nStarting tests...')
+        test_register(pushbots)
+        test_register_batch(pushbots)
+        test_alias(pushbots)
+        test_tag(pushbots)
+        test_untag(pushbots)
+        test_device_location(pushbots)
+        test_device_info(pushbots)
+        test_badge(pushbots)
+        test_analytics(pushbots)
+        test_push(pushbots)
+        test_push_batch(pushbots)
+        test_unregister(pushbots)
+        debug('\nDone testing!')
+    except KeyboardInterrupt:
+        return
+    except Exception as e:
+        debug('Exception found:{0}:{1}'.format(type(e), e), error=True)
+    finally:
+        unregister_all(pushbots)  # Unregister all tokens
 
 if __name__ == '__main__':
     main()
