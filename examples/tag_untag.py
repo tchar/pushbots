@@ -1,14 +1,15 @@
+"""
+The following examples are used to demonstrate how to tag/untag
+knowing the alias
+The method signatures are:
+Pushbots.tag(platform=None, tag=None, token=None, alias=None, data=None)
+and
+Pushbots.untag(platform=None, tag=None, token=None, alias=None, data=None)
+In which you must specify either platform, token and tag,
+or platform, alias and tag, or data.
+"""
+
 from pushbots import Pushbots
-
-# The following examples are used to demonstrate how to tag/untag
-# knowing the alias.
-
-# The method signatures are:
-# Pushbots.tag(platform=None, tag=None, token=None, alias=None, data=None)
-# and
-# Pushbots.untag(platform=None, tag=None, token=None, alias=None, data=None)
-# In which you must specify either platform, token and tag,
-# or platform, alias and tag, or data.
 
 
 def example_tag1():

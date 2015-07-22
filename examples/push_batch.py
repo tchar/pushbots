@@ -1,13 +1,15 @@
+"""
+The following examples are used to demonstrate how to use push batch
+
+The method signature is:
+Pushbots.push_batch(platform=None, msg=None, sound=None, badge=None,
+                    schedule=None, tags=None, except_tags=None, alias=None,
+                    except_alias=None, payload=None, data=None):
+In which you must specify either platform, msg and other params except data,
+or data
+"""
+
 from pushbots import Pushbots
-
-# The following examples are used to demonstrate how to use push batch
-
-# The method signature is:
-# Pushbots.push_batch(platform=None, msg=None, sound=None, badge=None,
-#                     schedule=None, tags=None, except_tags=None, alias=None,
-#                     except_alias=None, payload=None, data=None):
-# In which you must specify either platform, msg and other params except data,
-# or data
 
 
 def example_push_batch1():

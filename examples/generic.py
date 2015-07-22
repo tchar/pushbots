@@ -1,10 +1,12 @@
-from pushbots import Pushbots
+"""
+Here is defined a generic way to use API calls
+If there is an API call that you can't find in Pushbots
+you can use the generic examples.
+API calls reference:
+https://pushbots.com/developer/api/1
+"""
 
-# Here is defined a generic way to use API calls
-# If there is an API call that you can't find in Pushbots
-# you can use the generic examples.
-# API calls reference:
-# https://pushbots.com/developer/api/1
+from pushbots import Pushbots
 
 
 def example_generic_put():

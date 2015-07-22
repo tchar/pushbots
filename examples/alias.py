@@ -1,13 +1,15 @@
+"""
+The following examples are used to demonstrate how to change alias
+knowing the current alias.
+
+The method signature is:
+Pushbots.alias(platform=None, token=None, alias=None,
+               current_alias=None, data=None)
+In which you must specify either platform, token and alias,
+or platform, alias and curret_alias, or data.
+"""
+
 from pushbots import Pushbots
-
-# The following examples are used to demonstrate how to change alias
-# knowing the current alias.
-
-# The method signature is:
-# Pushbots.alias(platform=None, token=None, alias=None,
-#                current_alias=None, data=None)
-# In which you must specify either platform, token and alias,
-# or platform, alias and curret_alias, or data.
 
 
 def example_alias1():

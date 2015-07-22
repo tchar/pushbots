@@ -1,13 +1,15 @@
+"""
+The following examples are used to demonstrate how to get/record
+analytics
+
+The method signatures are:
+Pushbots.get_analytics()
+and
+Pushbots.record_analytics(platform=None, data=None)
+In which you must specify either platform or data.
+"""
+
 from pushbots import Pushbots
-
-# The following examples are used to demonstrate how to get/record
-# analytics
-
-# The method signatures are:
-# Pushbots.get_analytics()
-# and
-# Pushbots.record_analytics(platform=None, data=None)
-# In which you must specify either platform or data.
 
 
 def example_get_analytics():
