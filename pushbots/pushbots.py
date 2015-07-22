@@ -36,7 +36,8 @@ class Pushbots:
     KEY_SETBADGECOUNT = 'setbadgecount'
 
     def __init__(self, app_id, secret):
-        """init method.
+        """
+        init method.
         @app_id     (String). Pushbots app id
         @secret     (String). Pushbots secret
         """
@@ -52,40 +53,65 @@ class Pushbots:
                 'Content-Type': 'application/json'}
 
     def put(self, api_url, headers, data=None):
-        """Generic method for put requests.
+        """
+        Generic method for put requests.
+        with the json response, or empty dictionary if empty response
         @headers (Dict). Headers to include
         @data    (Dict). Data to include in json (python dict) format
+        @return  (Integer, Dict). Returns the request's response status
+                 code, and a dictionary with the json response, or empty
+                 if there was no repsonse
         """
         if data is None:
             r = requests.put(api_url, headers=headers)
         else:
             data = json.dumps(data)
             r = requests.put(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        try:
+            return r.status_code, r.json()
+        except ValueError:
+            return r.status_code, {}
 
     def post(self, api_url, headers, data=None):
-        """Generic method for post requests.
+        """
+        Generic method for post requests.
+        with the json response, or empty dictionary if empty response
         @headers (Dict). Headers to include
         @data    (Dict). Data to include in json (python dict) format
+        @return  (Integer, Dict). Returns the request's response status
+                 code, and a dictionary with the json response, or empty
+                 if there was no repsonse
         """
         if data is None:
             r = requests.post(api_url, headers=headers)
         else:
             data = json.dumps(data)
             r = requests.post(api_url, headers=headers, data=data)
-        return r.status_code, r.text
+        try:
+            return r.status_code, r.json()
+        except ValueError:
+            return r.status_code, {}
 
     def get(self, api_url, headers):
-        """Generic method for get requests.
+        """
+        Generic method for get requests.
+        with the json response, or empty dictionary if empty response
         @headers (Dict). Headers to include
         @data    (Dict). Data to include in json (python dict) format
+        @return  (Integer, Dict). Returns the request's response status
+                 code, and a dictionary with the json response, or empty
+                 if there was no repsonse
         """
         r = requests.get(api_url, headers=headers)
-        return r.status_code, r.text
+        try:
+            return r.status_code, r.json()
+        except ValueError:
+            return r.status_code, {}
 
     def register(self, token=None, platform=None, lat=None, lng=None,
                  active=None, tag=None, alias=None, data=None):
-        """Register device token of the app in the database first time,
+        """
+        Register device token of the app in the database first time,
         and update it with every launch of the app , device data will
         be updated if registered already.
         You must, at least, specify either data or the other params.
@@ -102,6 +128,7 @@ class Pushbots:
                     the deviceToken,if empty array that'll remove any
                     associated tags e.g. ["Culture" , "EGYPT"].
         @data       Required (Dict). Data to be sent.
+        @return     (Integer, Dict). The result of self.put()
         """
 
         if data is None:
@@ -112,7 +139,8 @@ class Pushbots:
         return self.put(api_url=api_url, headers=headers, data=data)
 
     def register_batch(self, tokens=None, platform=None, tags=None, data=None):
-        """Register multiple devices up to 500 Device per request
+        """
+        Register multiple devices up to 500 Device per request
         You must, at least, specify either data or the other params.
 
         @tokens     Required (List of strings). List of devices tokens
@@ -121,6 +149,7 @@ class Pushbots:
         @tags        Optional (List of strings). List of tags associated
                     with all imported devices e.g. ["Culture" , "USA"].
         @data       Required (Dict). Data to be sent.
+        @return     (Integer, Dict). The result of self.put()
         """
 
         if data is None:
@@ -130,7 +159,8 @@ class Pushbots:
         return self.put(api_url=api_url, headers=headers, data=data)
 
     def unregister(self, token=None, platform=None, data=None):
-        """unRegister device token of the app from the database
+        """
+        unRegister device token of the app from the database
         You must, at least, specify either data or the other params.
 
         @token      Required (String). The unique token retrieved by your app;
@@ -138,6 +168,7 @@ class Pushbots:
                     and usually it's managed using SDK.
         @platform   Required (String). 0 for iOS, 1 for Android.
         @data       Required (Dict). Data to be sent.
+        @return     (Integer, Dict). The result of self.put()
         """
 
         if data is None:
@@ -148,7 +179,8 @@ class Pushbots:
 
     def alias(self, platform=None, token=None, alias=None, current_alias=None,
               data=None):
-        """Add/update alias of a device.
+        """
+        Add/update alias of a device.
         You must, at least, specify either data or the other params.
 
         @platform   Required (String). 0 for iOS, 1 for Android.
@@ -163,6 +195,7 @@ class Pushbots:
         @current_alias  Optional (String). Set this parameter in case you want
                         to update existing alias.
         @data       Required (Dict). Data to be sent.
+        @return     (Integer, Dict). The result of self.put()
         """
 
         if data is None:
@@ -173,7 +206,8 @@ class Pushbots:
         return self.put(api_url=api_url, headers=headers, data=data)
 
     def tag(self, platform=None, tag=None, token=None, alias=None, data=None):
-        """Tag a device with its token through SDK or Alias through your backend
+        """
+        Tag a device with its token through SDK or Alias through your backend
         You must, at least, specify either data or the other params.
 
         @platform   Required (String). 0 for iOS, 1 for Android.
@@ -187,6 +221,7 @@ class Pushbots:
                     tokens and it must be unique for every app e.g.
                     "username", "email" ..etc.
         @data       Required (Dict). Data to be sent.
+        @return     (Integer, Dict). The result of self.put()
         """
 
         if data is None:
@@ -198,7 +233,8 @@ class Pushbots:
 
     def untag(self, platform=None, tag=None, token=None,
               alias=None, data=None):
-        """Tag a device with its token through SDK or Alias through your backend
+        """
+        Tag a device with its token through SDK or Alias through your backend
         You must, at least, specify either data or the other params.
 
         @platform   Required (String). 0 for iOS, 1 for Android.
@@ -212,6 +248,7 @@ class Pushbots:
                     tokens and it must be unique for every app e.g.
                     "username", "email" ..etc.
         @data       Required (Dict). Data to be sent.
+        @return     (Integer, Dict). The result of self.put()
         """
 
         if data is None:
@@ -223,7 +260,8 @@ class Pushbots:
 
     def device_location(self, platform=None, token=None, lat=None,
                         lng=None, data=None):
-        """Add/update location of a device
+        """
+        Add/update location of a device
         You must, at least, specify either data or the other params.
 
         @platform   Required (String). 0 for iOS, 1 for Android.
@@ -233,6 +271,7 @@ class Pushbots:
         @lat        Required (String). Location latitude e.g. 33.7489.
         @lng        Required (String). Location longitude e.g. -84.3789.
         @data       Required (Dict). Data to be sent.
+        @return     (Integer, Dict). The result of self.put()
         """
 
         if data is None:
@@ -242,9 +281,24 @@ class Pushbots:
         headers = self.headers
         return self.put(api_url=api_url, headers=headers, data=data)
 
+    def device_info(self, token=None):
+        """
+        Get device info.
+        A token is needed to fetch info
+
+        @token      Required (String). The device's token.
+        @return     (Integer, Dict). The result of self.get()
+        """
+
+        api_url = 'https://api.pushbots.com/deviceToken/one'
+        headers = {'x-pushbots-appid': self._app_id,
+                   'token': token, 'Content-Type': 'application/json'}
+        return self.get(api_url=api_url, headers=headers)
+
     def push(self, platform=None, token=None, msg=None, sound=None,
              badge=None, payload=None, data=None):
-        """Push a notification to a single device.
+        """
+        Push a notification to a single device.
         You must, at least, specify either data or the other params.
 
         @platform   Required (String). 0 for iOS, 1 for Android.
@@ -257,6 +311,7 @@ class Pushbots:
                     badge of all devices.
         @payload    Optional (Dict). Custom fields.
         @data       Required (Dict). Data to be sent.
+        @return     (Integer, Dict). The result of self.post()
         """
 
         if data is None:
@@ -269,7 +324,8 @@ class Pushbots:
     def push_batch(self, platform=None, msg=None, sound=None, badge=None,
                    schedule=None, tags=None, except_tags=None, alias=None,
                    except_alias=None, payload=None, data=None):
-        """Push a notification to Devices under certain conditions.
+        """
+        Push a notification to Devices under certain conditions.
         You must, at least, specify either data or the other params.
 
         @platform   Required (List of strings). 0 for iOS, 1 for Android,
@@ -291,6 +347,7 @@ class Pushbots:
                       notification not to be pushed
         @payload    Optional (Dict). Custom fields.
         @data       Required (Dict). Data to be sent.
+        @return     (Integer, Dict). The result of self.post()
         """
 
         if data is None:
@@ -303,7 +360,8 @@ class Pushbots:
         return self.post(api_url=api_url, headers=headers, data=data)
 
     def badge(self, token=None, platform=None, setbadgecount=None, data=None):
-        """Update device Badge
+        """
+        Update device Badge
         You must, at least, specify either data or the other params.
 
         @platform   Required (String). 0 for iOS, 1 for Android.
@@ -311,6 +369,7 @@ class Pushbots:
                     device token of the iOS app or RegID of the android App.
         @badge_count Required (Integer). New Badge count.
         @data       Required (Dict). Data to be sent.
+        @return     (Integer, Dict). The result of self.put()
         """
 
         if data is None:
@@ -321,7 +380,11 @@ class Pushbots:
         return self.put(api_url=api_url, headers=headers, data=data)
 
     def get_analytics(self):
-        """Get Push analytics of a single Application"""
+        """
+        Get Push analytics of a single Application
+
+        @return     (Integer, Dict). The result of self.get()
+        """
 
         api_url = 'https://api.pushbots.com/analytics'
         headers = self.headers
@@ -333,6 +396,7 @@ class Pushbots:
 
         @platform   Required (String). 0 for iOS, 1 for Android.
         @data       Required (Dict). Data to be sent.
+        @return     (Integer, Dict). The result of self.put()
         """
 
         if data is None:
@@ -341,13 +405,16 @@ class Pushbots:
         headers = self.headers
         return self.put(api_url=api_url, headers=headers, data=data)
 
-    # TODO: implement device_info()
-
     def _get_data(self, platform=None, token=None, tokens=None, tag=None,
                   tags=None, except_tags=None, lat=None, lng=None, active=None,
                   alias=None, except_alias=None, current_alias=None, msg=None,
                   sound=None, badge=None, schedule=None, payload=None,
                   setbadgecount=None):
+        """
+        Constructs the dictionary (json) to be passed to the request,
+        according to the fields provided.
+        """
+
         data = {}
         if platform is not None:
             data[self.KEY_PLATFORM] = platform
