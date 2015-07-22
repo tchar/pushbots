@@ -1,6 +1,6 @@
 # pushbots #
 A pushbots python 2/python 3 API module (wrapper). The module, the tests and the examples work for both python 2 and python 3 versions.  
-Current pushbots module supports the following list of API calls.  
+Current pushbots module supports all of the pushbots API calls.  
 In the following list, some of the API calls are tagged with "(For testing API call)". This means that a token is needed to perform those API calls and since this module is reserved for backends, you, normally, won't be using those API calls:
 * Register        (For testing API call)
 * Register Batch  (For testing API call)
@@ -9,19 +9,20 @@ In the following list, some of the API calls are tagged with "(For testing API c
 * Tag
 * unTag
 * Device Location (For testing API call)
+* Device Info     (For testing API call)
 * Push            (For testing API call)
 * Push Batch
 * Get Push analytics
 * Record Analytics  
   
-There is also a second list of generic API calls, for calls not listed in the first list:
+There is also a second list of generic API calls, for calls not listed in the first list. At the moment of creating this all API calls are supported. This is provided for future API calls:
 * Put (For generic put API calls, not listed above)
 * Post (For generic post API calls, not listed above)
 * Get (For generic get API calls, not listed above)
 
 Dependencies
 ------------
-For pushbots to work python requests must be installed:  
+For pushbots to work, python "requests" must be installed:  
 http://docs.python-requests.org/en/latest/  
 You can install requests with pip:  
 ```bash
@@ -47,7 +48,7 @@ You can run the tests by typing from the parent directory:
 ```bash
 python -m tests.run
 ```
-If you want help on how to run tests type:
+If you want help on how to run tests, type:
 ```bash
 python -m tests.run -h
 ```
