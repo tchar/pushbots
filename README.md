@@ -42,7 +42,7 @@ Examples
 --------
 You can find examples under examples directory.
 If there is an API call missing from the first list mentioned above, you can view the examples/generic.py examples, on how to make custom API calls, listed in the second list mentioned (put, post, get).
-If you want to perform token operations, you can use the examples/get_token_from_alias.py to get the devices token and platform associated with a specific alias. Also the files, examples/location.py and examples/unregister.py make use of tokens to make an API call, whereas all the other files in examples make use of alias, tags etc for the API calls.
+If you want to perform token operations, you can use the examples/get_token_from_alias.py to get the devices tokens and platforms associated with a specific alias. Also the files, examples/location.py and examples/unregister.py make use of tokens to make an API call, whereas all the other files in examples make use of alias, tags etc for the API calls.
 
 Tests
 -----
