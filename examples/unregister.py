@@ -38,6 +38,3 @@ def example_unregister_from_alias():
     for (token, platform) in devices:
         c, d = pushbots.unregister(token=token, platform=platform)
         print('{0}:{1}'.format(c, d))
-
-
-example_unregister_from_alias()

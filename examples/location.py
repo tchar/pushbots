@@ -42,6 +42,3 @@ def example_location_from_alias():
         c, d = pushbots.device_location(token=token, platform=platform,
                                         lat=lat, lng=lng)
         print('{0}:{1}'.format(c, d))
-
-
-example_location_from_alias()
