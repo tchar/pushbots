@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 def get_analytics(pushbots):
     return pushbots.get_analytics()
 

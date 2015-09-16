@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 def alias_token(pushbots, token, platform, alias):
     return pushbots.alias(platform=platform, token=token,
                           alias=alias)

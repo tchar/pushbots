@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 def push_batch_tags(pushbots, platform, msg, sound, badge, schedule,
                     tags, except_tags, payload):
     return pushbots.push_batch(platform=platform, msg=msg,

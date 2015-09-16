@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 """
 Main pusbots module. To use just import pushbots
 Author Tilemachos Charalampous

@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 """
 Here is defined a generic way to use API calls
 If there is an API call that you can't find in Pushbots

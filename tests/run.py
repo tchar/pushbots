@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 """
 This is the python script to run all tests.
 Run with puthon -m tests.run from parent directory.

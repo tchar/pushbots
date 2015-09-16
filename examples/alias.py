@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 """
 The following examples are used to demonstrate how to change alias
 knowing the current alias.

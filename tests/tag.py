@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 def tag_token(pushbots, platform, token, tag):
     return pushbots.tag(platform=platform, token=token, tag=tag)
 

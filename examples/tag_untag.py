@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 """
 The following examples are used to demonstrate how to tag/untag
 knowing the alias

@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 """
 Example on how to get all devices tokens and platforms given an alias
 """

@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 """
 This is an example on how to change location, when you don't know
 the token, but  you know an alias. Note that many devices can have

@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 def devices(pushbots):
     return pushbots.devices_info()
 

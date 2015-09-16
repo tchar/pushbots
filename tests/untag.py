@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 def untag_token(pushbots, platform, token, tag):
     return pushbots.untag(platform=platform, token=token, tag=tag)
 
