@@ -14,20 +14,23 @@ in ACCEPTABLE_CODES and with DEBUG==False, no output is printed.
 In the end, the virtual devices are deleted.
 """
 
-from tests.register import register_token_simple, register_token, register_data
-from tests.register_batch import register_batch_tokens, register_batch_data
-from tests.unregister import unregister_token, unregister_data
-from tests.alias import alias_token, alias_alias, alias_data
-from tests.tag import tag_token, tag_alias, tag_data
-from tests.untag import untag_token, untag_alias, untag_data
-from tests.device_location import device_location_token, device_location_data
-from tests.device import devices, device_info
-from tests.badge import badge_token, badge_data
-from tests.analytics import (get_analytics, record_analytics_platform,
-                             record_analytics_data)
-from tests.push import push_token, push_data
-from tests.push_batch import (push_batch_tags, push_batch_alias1,
-                              push_batch_alias2, push_batch_data)
+from pushbots.tests.register import (register_token_simple,
+                                     register_token, register_data)
+from pushbots.tests.register_batch import (register_batch_tokens,
+                                           register_batch_data)
+from pushbots.tests.unregister import unregister_token, unregister_data
+from pushbots.tests.alias import alias_token, alias_alias, alias_data
+from pushbots.tests.tag import tag_token, tag_alias, tag_data
+from pushbots.tests.untag import untag_token, untag_alias, untag_data
+from pushbots.tests.device_location import (device_location_token,
+                                            device_location_data)
+from pushbots.tests.device import devices, device_info
+from pushbots.tests.badge import badge_token, badge_data
+from pushbots.tests.analytics import (get_analytics, record_analytics_platform,
+                                      record_analytics_data)
+from pushbots.tests.push import push_token, push_data
+from pushbots.tests.push_batch import (push_batch_tags, push_batch_alias1,
+                                       push_batch_alias2, push_batch_data)
 from pushbots import Pushbots
 import random
 import string

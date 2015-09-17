@@ -1,0 +1,17 @@
+## [0.0.1]
+### Added
+- Support for Register        
+- Support for Register Batch  
+- Support for unRegister      
+- Support for Alias
+- Support for Tag
+- Support for unTag
+- Support for Device Location
+- Support for Devices Info
+- Support for Device Info    
+- Support for Push           
+- Support for Push Batch
+- Support for Get Push analytics
+- Support for Record Analytics
+- Tests under pushbots/tests
+- Examples under pushbots/examples

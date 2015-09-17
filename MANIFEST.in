@@ -1,0 +1,7 @@
+#example files
+include pushbots/examples/*.py
+
+#Misc
+include LICENSE.txt
+include README.md
+include CHANGELOG.txt
