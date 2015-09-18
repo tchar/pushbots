@@ -3,5 +3,5 @@ include pushbots/examples/*.py
 
 #Misc
 include LICENSE.txt
-include README.md
+include README.rst
 include CHANGELOG.txt

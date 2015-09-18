@@ -8,16 +8,12 @@ from os import path
 
 current_dir = path.abspath(path.dirname(__file__))
 
-try:
-    from pypandoc import convert
 
-    def read_md(f): return convert(path.join(current_dir, f), 'rst')
-
-except ImportError:
-    print('Warning: pypandoc module not found, could not convert ,'
-          ' Markdown to RST')
-
-    def read_md(f): return open(path.join(current_dir, f), 'r').read()
+def read_description(f):
+    try:
+        return open(path.join(current_dir, f), 'r').read()
+    except Exception:
+        return ''
 
 
 setup(
@@ -26,10 +22,13 @@ setup(
     version='0.0.1',
 
     description='REST API library for pushbots.',
-    long_description=read_md('README.md'),
+    long_description=read_description('README.rst'),
 
     # The project's main homepage.
     url='https://github.com/tchar/pushbots',
+
+    # The project's download page
+    download_url='https://github.com/tchar/pushbots/releases',
 
     # Author details
     author='Tilemachos Charalampous',
