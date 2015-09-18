@@ -1,6 +1,6 @@
 # pushbots #
-A pushbots python 2/python 3 API module (wrapper). The module, the tests and the examples work for both python 2 and python 3 versions.  
-Current pushbots module supports all of the pushbots API calls. List of supported API calls following:
+A python 2/python 3 REST API library module (wrapper) for [pushbots](https://pushbots.com/). The module, the tests and the examples work for both python 2 and python 3 versions.  
+Current "pushbots" module supports all of the pushbots API calls. List of supported API calls follow:
 * Register        (For testing API call)
 * Register Batch  (For testing API call)
 * unRegister      (For testing API call)
@@ -22,11 +22,24 @@ There is also a second list of generic API calls, for calls not listed in the fi
 * Post (For generic post API calls, not listed above)
 * Get (For generic get API calls, not listed above)
 
+Install
+-------
+You can choose to install "pushbots". If you don't want to install it, you can manually copy the "pushbots" package into your project.
+There are two ways to install "pushbots".
+* With pip:
+  ```
+  pip install pushbots
+  ```
+* Manually: Go to [releases](https://github.com/tchar/pushbots/releases) and download the latest version.
+  Extract the compressed file, navigate to project's root directory and run:
+  ```
+  python setup.py install
+  ```
+
 Dependencies
 ------------
-For pushbots to work, python "requests" must be installed:  
+For "pushbots" to work, python "requests" must be installed. If you already have "setuptools" installed and choose to install "pushbots" from pip or setup.py, you don't have to manually install "requests". On any other case, you must install it manually:  
 http://docs.python-requests.org/en/latest/  
-You can install requests with pip:  
 ```bash
 pip install requests
 ```
@@ -40,18 +53,18 @@ from pushbots import Pushbots
 
 Examples
 --------
-You can find examples under examples directory.
+You can find examples under pushbots/examples directory.
 If there is an API call missing from the first list mentioned above, you can view the examples/generic.py examples, on how to make custom API calls, listed in the second list mentioned (put, post, get).
 If you want to perform token operations, you can use the examples/get_token_from_alias.py to get the devices tokens and platforms associated with a specific alias. Also the files, examples/location.py and examples/unregister.py make use of tokens to make an API call, whereas all the other files in examples make use of alias, tags etc for the API calls.
 
 Tests
 -----
-Tests create virtual devices to test the API calls.
-You can run the tests by typing from the parent directory:  
+The tests package is located under pushbots directory. Tests create virtual devices to test the API calls provided by "pushbots" module.
+You can run the tests by typing:  
 ```bash
-python -m tests.run
+python -m pushbots.tests.run
 ```
 If you want help on how to run tests, type:
 ```bash
-python -m tests.run -h
+python -m pushbots.tests.run -h
 ```
