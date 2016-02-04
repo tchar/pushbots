@@ -14,7 +14,7 @@ def get_token_and_platform_from_alias(pushbots, alias):
     """
 
     devices = []
-    code, content = pushbots.devices_info()
+    code, content = pushbots.devices_info_all()
     if code != 200:
         print('Something went wrong:{0}'.format(content))
         return

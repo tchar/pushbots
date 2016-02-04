@@ -24,7 +24,7 @@ from pushbots.tests.tag import tag_token, tag_alias, tag_data
 from pushbots.tests.untag import untag_token, untag_alias, untag_data
 from pushbots.tests.device_location import (device_location_token,
                                             device_location_data)
-from pushbots.tests.device import devices, device_info
+from pushbots.tests.device import devices_info_all, device_info
 from pushbots.tests.badge import badge_token, badge_data
 from pushbots.tests.analytics import (get_analytics, record_analytics_platform,
                                       record_analytics_data)
@@ -213,7 +213,7 @@ def test_device_location(pushbots):
 
 def test_device(pushbots):
     d_msg = '\nTesting devices().'
-    c, d = devices(pushbots=pushbots)
+    c, d = devices_info_all(pushbots=pushbots)
     process_request(d_msg, c, d)
 
     d_msg = '\nTesting device_info() with token:{0}.'.format(token1)

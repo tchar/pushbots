@@ -296,16 +296,6 @@ class Pushbots:
         headers = self.headers
         return self.put(api_url=api_url, headers=headers, data=data)
 
-    def devices_info(self):
-        """
-        Gets information about all registered devices
-        @return     (Integer, Dict). The result of self.get()
-        """
-
-        api_url = 'https://api.pushbots.com/devices'
-        headers = self.headers
-        return self.get(api_url=api_url, headers=headers)
-
     def device_info(self, token=None):
         """
         Get device info.
@@ -319,7 +309,7 @@ class Pushbots:
         headers = {'x-pushbots-appid': self._app_id,
                    'token': token, 'Content-Type': 'application/json'}
         return self.get(api_url=api_url, headers=headers)
-        
+
     def devices_info_all(self):
         """
         Get all device info.
@@ -327,9 +317,9 @@ class Pushbots:
         """
         api_url = 'https://api.pushbots.com/deviceToken/all'
         headers = {'x-pushbots-appid': self._app_id,
-                    'x-pushbots-secret' :self._secret,
+                   'x-pushbots-secret': self._secret,
                    'Content-Type': 'application/json'}
-        return self.get(api_url=api_url, headers=headers)        
+        return self.get(api_url=api_url, headers=headers)
 
     def push(self, platform=None, token=None, msg=None, sound=None,
              badge=None, payload=None, data=None):

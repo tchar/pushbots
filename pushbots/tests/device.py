@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
-def devices(pushbots):
-    return pushbots.devices_info()
+def devices_info_all(pushbots):
+    return pushbots.devices_info_all()
 
 
 def device_info(pushbots, token):
