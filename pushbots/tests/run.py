@@ -212,7 +212,7 @@ def test_device_location(pushbots):
 
 
 def test_device(pushbots):
-    d_msg = '\nTesting devices().'
+    d_msg = '\nTesting devices_info_all().'
     c, d = devices_info_all(pushbots=pushbots)
     process_request(d_msg, c, d)
 
