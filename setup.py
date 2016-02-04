@@ -19,7 +19,7 @@ def read_description(f):
 setup(
     name='pushbots',
 
-    version='0.0.1',
+    version='0.0.2',
 
     description='REST API library for pushbots.',
     long_description=read_description('README.rst'),
