@@ -1,6 +1,6 @@
 # pushbots #
 
-PushBots sends push notifications to an application users on mobile and web. PushBot's 
+PushBots sends push notifications to users on mobile and web. PushBot's 
 [API](https://en.wikipedia.org/wiki/Application_programming_interface) is organized around 
 [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).
 
