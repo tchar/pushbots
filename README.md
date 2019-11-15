@@ -1,7 +1,7 @@
 # pushbots #
 
-PushBots sends push notifications to an application users on mobile and web. PushBot's 
-[API](https://en.wikipedia.org/wiki/Application_programming_interface) is organized around 
+[PushBots](https://pushbots.com/) sends push notifications to users on mobile and web. 
+[PushBot's API](https://developer.pushbots.com/docs#false) is organized around 
 [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).
 
 This project is a Python module, or specifically a wrapper, for [PushBots](https://pushbots.com/). The module, tests, 
@@ -53,7 +53,7 @@ There are two ways to install Pushbots.
   ```bash
   $ python setup.py install
   ```
-### Requirements 
+### Dependencies  
 
 Pushbots requires Python [Requests](https://pypi.org/project/requests/). You don't have to manually install Requests 
 if Setuptools is installed and you choose to install Pushbots from pip or setup.py.
